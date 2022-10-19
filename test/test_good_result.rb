@@ -7,7 +7,15 @@ class TestGoodResult < Minitest::Test
     refute_nil ::GoodResult::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
+  def test_success
+    result = ::GoodResult::Success.new('yay')
+    assert_predicate result, :success?
+    refute_predicate result, :failure?
+  end
+
+  def test_failure
+    result = ::GoodResult::Failure.new('nay')
+    assert_predicate result, :failure?
+    refute_predicate result, :success?
   end
 end
